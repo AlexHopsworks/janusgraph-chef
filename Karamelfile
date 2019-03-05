@@ -3,3 +3,5 @@ dependencies:
     global:
       - kagent::install
   - recipe: janusgraph::default
+    global:
+      - elastic::default

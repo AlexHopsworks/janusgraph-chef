@@ -13,6 +13,7 @@ end
 
 depends 'java'
 depends 'kagent'
+depends 'elastic'
 
 recipe "janusgraph::install", "Installs Janusgraph"
 recipe "janusgraph::default", "Configures Janusgraph for use within Hopsworks"

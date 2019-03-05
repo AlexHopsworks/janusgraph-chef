@@ -93,3 +93,11 @@ template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/gremlin-server.y
   mode 0750
   force true
 end
+
+template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/janusgraph.sh" do
+  source "janusgraph.sh.erb" 
+  owner node['janusgraph']['user']
+  group node['janusgraph']['group']
+  mode 0750
+  force true
+end
