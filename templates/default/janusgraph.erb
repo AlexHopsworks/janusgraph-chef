@@ -1,0 +1,88 @@
+#!/bin/sh
+#
+# Startup script for janusgraph
+#
+### BEGIN INIT INFO
+# Provides:                     janusgraph*
+# Required-Start:                 
+# Should-Start:                 
+# Required-Stop:                  
+# Default-Start:                2 3 4 5
+# Default-Stop:                 0 1 6
+# Short-Description:            start and stop janusgraph-*
+# Description:                  Start/Stop/Restart janusgraph
+### END INIT INFO
+
+# Variables
+
+START_PROG="<%= node['janusgraph']['base_dir'] %>/bin/janusgraph.sh start"
+STOP_PROG="<%= node['janusgraph']['base_dir'] %>/bin/janusgraph.sh stop"  
+PID_FILE=<%= node['janusgraph']['pid_file'] %>
+EXEC_WITH_USER="su <%= node['janusgraph']['user'] %> -c"
+
+start() {
+  ulimit -n 65000 2>&1 > /dev/null
+  $EXEC_WITH_USER "$START_PROG"
+  return $?
+}
+
+stop() {
+  $EXEC_WITH_USER "$STOP_PROG"
+  return $?
+}
+
+status() {
+  res=1
+  if [ -f $PID_FILE ] ; then
+     PID=`cat $PID_FILE`
+     kill -0 $PID
+     res=$?
+  fi
+  if [ $res -eq 0 ] ; then
+   echo "janusgraph($PID) is running"
+  else
+   echo "janusgraph is not running"
+  fi
+  return $res
+}
+
+restart() {
+  status
+  if [ $? -eq 0 ] ; then
+    stop
+    sleep 3
+  fi
+  start
+  return $?
+}
+
+# user-supplied parameter to stop/start/restart process.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  reload)
+    restart
+    ;;
+  status)
+    status
+    ;;
+  -h|--help)
+    echo ""
+    echo "usage: <prog> start|stop|restart|status"
+    echo ""
+    exit 0
+    ;;
+  *)
+    echo $"Usage: <prog> {start|stop|restart|status}"
+    exit 1
+  esac
+
+
+exit $?
