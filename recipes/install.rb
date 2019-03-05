@@ -91,7 +91,6 @@ template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/gremlin-server.y
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
   mode 0750
-  force true
 end
 
 template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/janusgraph.sh" do
@@ -99,5 +98,4 @@ template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/janusgraph.sh" d
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
   mode 0750
-  force true
 end
