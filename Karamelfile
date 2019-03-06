@@ -2,6 +2,11 @@ dependencies:
   - recipe: janusgraph::install
     global:
       - kagent::install
-  - recipe: janusgraph::default
+  - recipe: janusgraph::cassandra
     global:
+      - kagent::default
+  - recipe: janusgraph::gremlin
+    global:
+      - kagent::default
+      - janusgraph::cassandra
       - elastic::default
