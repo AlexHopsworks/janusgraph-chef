@@ -93,8 +93,15 @@ template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/gremlin-server.y
   mode 0750
 end
 
-template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/janusgraph.sh" do
-  source "janusgraph.sh.erb" 
+template "#{node['janusgraph']['base_dir']}/bin/janusgraph-gremlin.sh" do
+  source "janusgraph-gremlin.sh.erb" 
+  owner node['janusgraph']['user']
+  group node['janusgraph']['group']
+  mode 0750
+end
+
+template "#{node['janusgraph']['base_dir']}/bin/janusgraph-cassandra.sh" do
+  source "janusgraph-cassandra.sh.erb" 
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
   mode 0750

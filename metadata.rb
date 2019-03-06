@@ -16,7 +16,8 @@ depends 'kagent'
 depends 'elastic'
 
 recipe "janusgraph::install", "Installs Janusgraph"
-recipe "janusgraph::default", "Configures Janusgraph for use within Hopsworks"
+recipe "janusgraph::cassandra", "Setup Janusgraph Cassandra"
+recipe "janusgraph::gremlin", "Setup Janusgraph Gremlin with schema and init scripts for provenance"
 recipe "janusgraph::purge", "Deletes Janusgraph"
 
 attribute "janusgraph/user",

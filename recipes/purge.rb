@@ -2,21 +2,37 @@
     user "root"
     ignore_failure true
     code <<-EOF
-      service stop janusgraph
-      systemctl stop janusgraph
+      service stop janusgraph-gremlin
+      systemctl stop janusgraph-gremlin
+      service stop janusgraph-cassandra
+      systemctl stop janusgraph-cassandra
     EOF
   end
 
-  file "/etc/init.d/janusgraph" do
+  file "/etc/init.d/janusgraph-gremlin" do
     action :delete
     ignore_failure true
   end
 
-  file "/usr/lib/systemd/system/janusgraph.service" do
+  file "/etc/init.d/janusgraph-cassandra" do
     action :delete
     ignore_failure true
   end
-  file "/lib/systemd/system/janusgraph.service" do
+
+  file "/usr/lib/systemd/system/janusgraph-gremlin.service" do
+    action :delete
+    ignore_failure true
+  end
+  file "/lib/systemd/system/janusgraph-gremlin.service" do
+    action :delete
+    ignore_failure true
+  end
+
+  file "/usr/lib/systemd/system/janusgraph-cassandra.service" do
+    action :delete
+    ignore_failure true
+  end
+  file "/lib/systemd/system/janusgraph-cassandra.service" do
     action :delete
     ignore_failure true
   end

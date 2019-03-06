@@ -1,0 +1,16 @@
+[Unit]
+Description = janusgraph-cassandra
+After = syslog.target network.target remote-fs.target
+
+[Service]
+User = <%= node['janusgraph']['user'] %>
+
+PIDFile = <%= node['janusgraph']['gremlin_pid_file'] %>
+ExecStart = "<%= node['janusgraph']['base_dir'] %>/bin/janusgraph-cassandra.sh start"
+ExecStop = "<%= node['janusgraph']['base_dir'] %>/bin/janusgraph-cassandra.sh stop"
+LimitNOFILE = 20000
+
+Type = forking
+
+[Install]
+WantedBy = multi-user.target

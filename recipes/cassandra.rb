@@ -5,7 +5,7 @@ when "ubuntu"
  end
 end
 
-service_name="janusgraph"
+service_name="janusgraph-cassandra"
 
 if node['janusgraph']['systemd'] == "true"
 
@@ -58,19 +58,9 @@ end
 
 end
 
-bash 'config_provenance_schema' do
-  user node['janusgraph']['user']
-  code <<-EOH
-    set -e
-    #{node['janusgraph']['base_dir']}/bin/gremlin.sh -e #{node['janusgraph']['base_dir']}/scripts/provenance_schema.groovy
-    touch #{provenance_schema_configured}
-  EOH
-  not_if { ::File.exists?( provenance_schema_configured) }
-end
-
 if node['kagent']['enabled'] == "true"
    kagent_config service_name do
      service service_name
-     log_file node['janusgraph']['gremlin_log']
+     log_file node['janusgraph']['cassandra_log']
    end
 end

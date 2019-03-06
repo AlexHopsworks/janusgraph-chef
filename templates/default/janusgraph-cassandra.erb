@@ -1,22 +1,22 @@
 #!/bin/sh
 #
-# Startup script for janusgraph
+# Startup script for janusgraph-cassandra
 #
 ### BEGIN INIT INFO
-# Provides:                     janusgraph*
+# Provides:                     janusgraph-cassandra*
 # Required-Start:                 
 # Should-Start:                 
 # Required-Stop:                  
 # Default-Start:                2 3 4 5
 # Default-Stop:                 0 1 6
-# Short-Description:            start and stop janusgraph-*
-# Description:                  Start/Stop/Restart janusgraph
+# Short-Description:            start and stop janusgraph-cassandra-*
+# Description:                  Start/Stop/Restart janusgraph-cassandra
 ### END INIT INFO
 
 # Variables
 
-START_PROG="<%= node['janusgraph']['base_dir'] %>/bin/janusgraph.sh start"
-STOP_PROG="<%= node['janusgraph']['base_dir'] %>/bin/janusgraph.sh stop"  
+START_PROG="<%= node['janusgraph']['base_dir'] %>/bin/janusgraph-cassandra.sh start"
+STOP_PROG="<%= node['janusgraph']['base_dir'] %>/bin/janusgraph-cassandra.sh stop"  
 PID_FILE=<%= node['janusgraph']['pid_file'] %>
 EXEC_WITH_USER="su <%= node['janusgraph']['user'] %> -c"
 
@@ -39,9 +39,9 @@ status() {
      res=$?
   fi
   if [ $res -eq 0 ] ; then
-   echo "janusgraph($PID) is running"
+   echo "janusgraph-cassandra($PID) is running"
   else
-   echo "janusgraph is not running"
+   echo "janusgraph-cassandra is not running"
   fi
   return $res
 }
