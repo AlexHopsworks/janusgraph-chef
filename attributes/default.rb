@@ -14,3 +14,6 @@ default['janusgraph']['cassandra_pid_file']       = "/tmp/janusgraph-cassandra.p
 default['janusgraph']['gremlin_log']              = node['janusgraph']['base_dir'] + "/log/gremlin-server.log"
 default['janusgraph']['cassandra_log']            = node['janusgraph']['base_dir'] + "/log/cassandra.log"
 default['janusgraph']['port']                     = 8182
+default['janusgraph']['graphexp']['repo']         = "https://github.com/AlexHopsworks/graphexp.git"
+default['janusgraph']['graphexp']['branch']       = "master"
+

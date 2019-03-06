@@ -14,11 +14,13 @@ end
 depends 'java'
 depends 'kagent'
 depends 'elastic'
+depends 'nodejs'
 
 recipe "janusgraph::install", "Installs Janusgraph"
 recipe "janusgraph::cassandra", "Setup Janusgraph Cassandra"
 recipe "janusgraph::gremlin", "Setup Janusgraph Gremlin with schema and init scripts for provenance"
 recipe "janusgraph::purge", "Deletes Janusgraph"
+recipe "janusgraph::dev", "Installs npm - http-server and graphexp to visualize provenance info"
 
 attribute "janusgraph/user",
           :description => "User to run Janusgraph services as",
