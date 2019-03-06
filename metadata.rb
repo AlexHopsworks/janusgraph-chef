@@ -30,7 +30,7 @@ attribute "janusgraph/group",
           :description => "Group to run Janusgraph services as",
           :type => "string"
 
-attribute "janusgraph/base_url",
+attribute "janusgraph/url",
           :description => "Url to Janusgraph artifacts(directory). We use janusgraph-0.3.1-hadoop2.tar.gz binaries",
           :type => "string"
 

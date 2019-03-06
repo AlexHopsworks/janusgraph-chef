@@ -41,7 +41,7 @@ link node["janusgraph"]["base_dir"] do
   to node["janusgraph"]["home"]
 end
 
-package_url = "#{node['janusgraph']['url']}"
+package_url = "#{node['janusgraph']['binaries']['url']}"
 base_package_filename = File.basename(package_url)
 cached_package_filename = "#{Chef::Config['file_cache_path']}/#{base_package_filename}"
 
