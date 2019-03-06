@@ -9,11 +9,11 @@ default['janusgraph']['systemd']                  = "true"
 default['janusgraph']['dir']                      = node['install']['dir'].empty? ? "/srv" : node['install']['dir']
 default['janusgraph']['base_dir']                 = node['janusgraph']['dir'] + "/janusgraph-hadoop2"
 default['janusgraph']['home']                     = node['janusgraph']['dir'] + "/janusgraph-" + node['janusgraph']['version'] + "-hadoop2"
-default['janusgraph']['gremlin_pid_file']         = "/tmp/janusgraph-gremlin.pid"
-default['janusgraph']['cassandra_pid_file']       = "/tmp/janusgraph-cassandra.pid"
-default['janusgraph']['gremlin_log']              = node['janusgraph']['base_dir'] + "/log/gremlin-server.log"
-default['janusgraph']['cassandra_log']            = node['janusgraph']['base_dir'] + "/log/cassandra.log"
-default['janusgraph']['port']                     = 8182
+default['janusgraph']['gremlin']['pid_file']      = "/tmp/janusgraph-gremlin.pid"
+default['janusgraph']['gremlin']['log']           = node['janusgraph']['base_dir'] + "/log/gremlin-server.log"
+default['janusgraph']['gremlin']['port']          = 8182
+default['janusgraph']['cassandra']['pid_file']    = "/tmp/janusgraph-cassandra.pid"
+default['janusgraph']['cassandra']['log']         = node['janusgraph']['base_dir'] + "/log/cassandra.log"
 default['janusgraph']['graphexp']['repo']         = "https://github.com/AlexHopsworks/graphexp.git"
 default['janusgraph']['graphexp']['branch']       = "master"
 

@@ -37,7 +37,7 @@ end
 if node['kagent']['enabled'] == "true"
   kagent_config service_name do
     service service_name
-    log_file node['janusgraph']['cassandra_log']
+    log_file node['janusgraph']['cassandra']'log']
   end
 end
 

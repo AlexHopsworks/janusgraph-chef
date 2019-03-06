@@ -5,9 +5,9 @@ After = syslog.target network.target remote-fs.target
 [Service]
 User = <%= node['janusgraph']['user'] %>
 
-PIDFile = <%= node['janusgraph']['gremlin_pid_file'] %>
-ExecStart = "<%= node['janusgraph']['base_dir'] %>/bin/janusgraph-gremlin.sh start"
-ExecStop = "<%= node['janusgraph']['base_dir'] %>/bin/janusgraph-gremlin.sh stop"
+PIDFile = <%= node['janusgraph']['gremlin']['pid_file'] %>
+ExecStart = <%= node['janusgraph']['base_dir'] %>/bin/janusgraph-gremlin.sh start
+ExecStop = <%= node['janusgraph']['base_dir'] %>/bin/janusgraph-gremlin.sh stop
 LimitNOFILE = 20000
 
 Type = forking

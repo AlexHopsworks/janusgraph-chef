@@ -23,7 +23,9 @@ GSRV_CONFIG_TAG=cassandra-es
 : ${SLEEP_INTERVAL_S:=2}
 VERBOSE=
 COMMAND=
-
+CASSANDRA_FRIENDLY_NAME=Cassandra
+CASSANDRA_CLASS_NAME=org.apache.cassandra.service.CassandraDaemon
+PID_FILE=<%= node['janusgraph']['cassandra']['pid_file'] %>
 # Locate the jps command.  Check $PATH, then check $JAVA_HOME/bin.
 # This does not need to by cygpath'd.
 JPS=
@@ -39,9 +41,6 @@ if [ -z "$JPS" ]; then
     echo "jps command not found.  Put the JDK's jps binary on the command path." >&2
     exit 1
 fi
-
-CASSANDRA_FRIENDLY_NAME=Cassandra
-CASSANDRA_CLASS_NAME=org.apache.cassandra.service.CassandraDaemon
 
 # wait_for_shutdown friendly_name class_name timeout_s
 wait_for_shutdown() {
@@ -98,6 +97,7 @@ start() {
     else
         CASSANDRA_INCLUDE="$BIN"/cassandra.in.sh "$BIN"/cassandra >/dev/null 2>&1 || exit 1
     fi
+    echo $! > $PID_FILE
 }
 
 stop() {

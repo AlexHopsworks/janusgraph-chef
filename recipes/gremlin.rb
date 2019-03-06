@@ -37,7 +37,7 @@ end
 if node['kagent']['enabled'] == "true"
   kagent_config service_name do
     service service_name
-    log_file node['janusgraph']['gremlin_log']
+    log_file node['janusgraph']['gremlin']['log']
   end
 end
 

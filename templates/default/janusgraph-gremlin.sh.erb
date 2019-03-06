@@ -23,6 +23,9 @@ GSRV_CONFIG_TAG=cassandra-es
 : ${SLEEP_INTERVAL_S:=2}
 VERBOSE=
 COMMAND=
+GREMLIN_FRIENDLY_NAME='Gremlin-Server'
+GREMLIN_CLASS_NAME=org.apache.tinkerpop.gremlin.server.GremlinServer
+PID_FILE=<%= node['janusgraph']['gremlin']['pid_file'] %>
 
 # Locate the jps command.  Check $PATH, then check $JAVA_HOME/bin.
 # This does not need to by cygpath'd.
@@ -39,9 +42,6 @@ if [ -z "$JPS" ]; then
     echo "jps command not found.  Put the JDK's jps binary on the command path." >&2
     exit 1
 fi
-
-GREMLIN_FRIENDLY_NAME='Gremlin-Server'
-GREMLIN_CLASS_NAME=org.apache.tinkerpop.gremlin.server.GremlinServer
 
 kill_class() {
     local p=`$JPS -l | grep "$2" | awk '{print $1}'`
@@ -152,6 +152,7 @@ start() {
     else
         "$BIN"/gremlin-server.sh conf/gremlin-server/gremlin-server.yaml >/dev/null 2>&1 &
     fi
+    echo $! > $PID_FILE
     wait_for_startup 'Gremlin-Server' $GSRV_IP $GSRV_PORT $GSRV_STARTUP_TIMEOUT_S || {
         echo "See gremlin-server.log for Gremlin-Server log output."  >&2
         return 1
