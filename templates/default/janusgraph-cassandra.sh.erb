@@ -97,7 +97,7 @@ start() {
     else
         CASSANDRA_INCLUDE="$BIN"/cassandra.in.sh "$BIN"/cassandra >/dev/null 2>&1 || exit 1
     fi
-    echo $! > $PID_FILE
+    echo `$JPS -l | grep "$CASSANDRA_CLASS_NAME" | awk '{print $1}'` > $PID_FILE
 }
 
 stop() {

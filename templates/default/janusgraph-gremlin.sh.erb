@@ -152,7 +152,7 @@ start() {
     else
         "$BIN"/gremlin-server.sh conf/gremlin-server/gremlin-server.yaml >/dev/null 2>&1 &
     fi
-    echo $! > $PID_FILE
+    echo `$JPS -l | grep "$GREMLIN_CLASS_NAME" | awk '{print $1}'` > $PID_FILE
     wait_for_startup 'Gremlin-Server' $GSRV_IP $GSRV_PORT $GSRV_STARTUP_TIMEOUT_S || {
         echo "See gremlin-server.log for Gremlin-Server log output."  >&2
         return 1

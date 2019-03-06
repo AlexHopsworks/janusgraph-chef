@@ -10,4 +10,8 @@ dependencies:
       - kagent::default
       - janusgraph::cassandra
       - elastic::default
+  - recipe: janusgraph::default
+    global:
+      - kagent::default
+      - elastic::default
   - recipe: janusgraph::dev
