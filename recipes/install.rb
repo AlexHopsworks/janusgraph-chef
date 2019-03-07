@@ -93,6 +93,16 @@ template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/gremlin-server.y
   mode 0750
 end
 
+elastic_addr = private_recipe_ip("elastic", "default") + ":#{node['elastic']['port']}"
+template "#{node['janusgraph']['base_dir']}/conf/janusgraph-cwl-es-server.properties" do
+  source "janusgraph-cwl-es-server.properties" 
+  owner node['janusgraph']['user']
+  group node['janusgraph']['group']
+  mode 0750
+  variables({ :elastic_addr => elastic_addr,
+            })
+end
+
 template "#{node['janusgraph']['base_dir']}/bin/janusgraph-gremlin.sh" do
   source "janusgraph-gremlin.sh.erb" 
   owner node['janusgraph']['user']
@@ -106,3 +116,4 @@ template "#{node['janusgraph']['base_dir']}/bin/janusgraph-cassandra.sh" do
   group node['janusgraph']['group']
   mode 0750
 end
+
