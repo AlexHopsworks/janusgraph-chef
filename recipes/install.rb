@@ -76,29 +76,29 @@ template "#{node['janusgraph']['base_dir']}/scripts/provenance_schema.groovy" do
   source "provenance_schema.groovy.erb" 
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
-  mode 0750
+  mode 0640
 end
 
 template "#{node['janusgraph']['base_dir']}/scripts/provenance_procedures.groovy" do
   source "provenance_procedures.groovy.erb" 
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
-  mode 0750
+  mode 0640
 end
 
 template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/gremlin-server.yaml" do
   source "gremlin-server.yaml.erb" 
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
-  mode 0750
+  mode 0640
 end
 
 elastic_addr = private_recipe_ip("elastic", "default") + ":#{node['elastic']['port']}"
-template "#{node['janusgraph']['base_dir']}/conf/janusgraph-cwl-es-server.properties" do
-  source "janusgraph-cwl-es-server.properties" 
+template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/janusgraph-cql-es-server.properties" do
+  source "janusgraph-cql-es-server.properties.erb" 
   owner node['janusgraph']['user']
   group node['janusgraph']['group']
-  mode 0750
+  mode 0640
   variables({ :elastic_addr => elastic_addr,
             })
 end
