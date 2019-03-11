@@ -16,4 +16,5 @@ default['janusgraph']['cassandra']['pid_file']    = "/tmp/janusgraph-cassandra.p
 default['janusgraph']['cassandra']['log']         = node['janusgraph']['base_dir'] + "/log/cassandra.log"
 default['janusgraph']['graphexp']['repo']         = "https://github.com/AlexHopsworks/graphexp.git"
 default['janusgraph']['graphexp']['branch']       = "master"
+default['janusgraph']['graphexp']['dir']          = node['janusgraph']['base_dir'] + "/graphexp"
 

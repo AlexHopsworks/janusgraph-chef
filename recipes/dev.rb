@@ -4,7 +4,7 @@ include_recipe "nodejs"
 package ['git', 'maven']
 
 # Clone Graphexp
-git node['janusgraph']['base_dir']  do
+git node['janusgraph']['graphexp']['dir']  do
   repository node['janusgraph']['graphexp']['repo']
   revision node['janusgraph']['graphexp']['branch']
   user node['janusgraph']['user']
