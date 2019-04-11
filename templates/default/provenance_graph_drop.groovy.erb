@@ -1,0 +1,6 @@
+:remote connect tinkerpop.server conf/remote.yaml
+:remote console
+//graph = JanusGraphFactory.open("conf/gremlin-server/janusgraph-cql-es-server.properties")
+JanusGraphFactory.drop(graph)
+graph = JanusGraphFactory.open("conf/gremlin-server/janusgraph-cql-es-server.properties")
+g = graph.traversal()

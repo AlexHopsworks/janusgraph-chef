@@ -86,6 +86,20 @@ template "#{node['janusgraph']['base_dir']}/scripts/provenance_procedures.groovy
   mode 0640
 end
 
+template "#{node['janusgraph']['base_dir']}/scripts/provenance_example.groovy" do
+  source "provenance_example.groovy.erb" 
+  owner node['janusgraph']['user']
+  group node['janusgraph']['group']
+  mode 0640
+end
+
+template "#{node['janusgraph']['base_dir']}/scripts/provenance_graph_drop.groovy" do
+  source "provenance_graph_drop.groovy.erb" 
+  owner node['janusgraph']['user']
+  group node['janusgraph']['group']
+  mode 0640
+end
+
 template "#{node['janusgraph']['base_dir']}/conf/gremlin-server/gremlin-server.yaml" do
   source "gremlin-server.yaml.erb" 
   owner node['janusgraph']['user']
