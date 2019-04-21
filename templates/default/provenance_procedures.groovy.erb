@@ -1,5 +1,5 @@
 def addInodeOperation(operation_id, operation_name, timestamp) {
-  return { g.V().has('inode_operation','i_o_id',operation_id).fold().coalesce(unfold(),g.addV('inode_operation').property('i_o_id',operation_id).property('i_o_name',operation_name).property('i_o_time', timestamp)).as('ex_operation') }
+  return { g.V().has('inode_operation','i_o_id',operation_id).fold().coalesce(unfold(),g.addV('inode_operation').property('i_o_id',operation_id).property('i_o_name',operation_name).property('t', timestamp)).as('ex_operation') }
 }
 def addProject(project_id, project_name) {
   return { f -> f.coalesce(g.V().has('project','p_id',project_id),addV('project').property('p_name',project_name).property('p_id',project_id)).as('ex_project') }
@@ -37,11 +37,11 @@ def batchFileOps(batch) {
   for (i = 0; i < batch.size(); i++) {
     def params = batch.getAt(i);
     if (params['i_id'] == params['p_id']) {
-      projectOp(params['i_o_id'], params['i_o_name'], params['p_id'], params['i_name'], params['u_id'], params['t_hour'], params['t_date'], params['i_o_time']);
+      projectOp(params['i_o_id'], params['i_o_name'], params['p_id'], params['i_name'], params['u_id'], params['t_hour'], params['t_date'], params['t']);
     } else if (params['i_id'] == params['d_id']) {
-      datasetOp(params['i_o_id'], params['i_o_name'], params['p_id'], params['d_id'], params['i_name'], params['u_id'], params['t_hour'], params['t_date'], params['i_o_time']);
+      datasetOp(params['i_o_id'], params['i_o_name'], params['p_id'], params['d_id'], params['i_name'], params['u_id'], params['t_hour'], params['t_date'], params['t']);
     } else {
-      inodeOp(params['i_o_id'], params['i_o_name'], params['p_i_id'], params['i_id'], params['i_name'], params['u_id'], params['t_hour'], params['t_date'], params['i_o_time']);
+      inodeOp(params['i_o_id'], params['i_o_name'], params['p_i_id'], params['i_id'], params['i_name'], params['u_id'], params['t_hour'], params['t_date'], params['t']);
     }
   } 
 }
