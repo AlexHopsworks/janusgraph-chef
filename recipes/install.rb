@@ -131,3 +131,10 @@ template "#{node['janusgraph']['base_dir']}/bin/janusgraph-cassandra.sh" do
   mode 0750
 end
 
+template "#{node['janusgraph']['base_dir']}/bin/provenance_reset.sh" do
+  source "provenance_reset.sh.erb" 
+  owner node['janusgraph']['user']
+  group node['janusgraph']['group']
+  mode 0750
+end
+

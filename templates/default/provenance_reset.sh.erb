@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+JANUS_HOME=/srv/hops/janusgraph-hadoop2
+
+${JANUS_HOME}/bin/gremlin.sh -e ${JANUS_HOME}/scripts/provenance_graph_drop.groovy
+systemctl restart cassandra
+systemctl restart gremlin
+${JANUS_HOME}/bin/gremlin.sh -e ${JANUS_HOME}/scripts/provenance_schema.groovy
